@@ -1,0 +1,565 @@
+<html lang="nl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Mhub]</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Syne:wght@400;500;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Algemene Kleuren */
+      --bg-color: #050608;
+      --card-bg: #0f1115;
+      --text-main: #ffffff;
+      --text-muted: #8b9bb4;
+      
+      /* Brand Colors */
+      --accent-mint: #00e5a0;     /* Portfolio & Dawah */
+      --accent-red: #ff4c4c;      /* Sandwich */
+      --accent-gold: #d4af37;     /* Contact */
+      --accent-purple: #9d4edd;   /* Wijsheid */
+      --accent-orange: #ff9f1c;   /* Promoties */
+      --accent-blue: #00a8ff;     /* Extra */
+      --accent-white: #ffffff;     /* Promoties */
+      --accent-gray: #ffecc9;      /*Thaura*/
+      
+      --font-mono: 'Space Mono', monospace;
+      --font-display: 'Syne', sans-serif;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-display);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh; /* WAS: height: 100vh; */
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;   /* WAARDE TOEGEVOEGD/VERANDERD: Zorgt voor verticale scroll */
+      overflow-x: hidden; /* Horizontale scroll uit */
+    }
+
+
+    /* --- Achtergrond Effecten --- */
+    .bg-grid {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0, 229, 160, 0.08) 0%, transparent 70%);
+      z-index: -1;
+      animation: pulseGlow 8s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* --- Layout --- */
+    .hub-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      width: 100%;
+      max-width: 1400px;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      justify-content: center;
+      width: auto;
+    }
+
+    /* --- Logo Styles (Midden) --- */
+
+    .camel-img {
+  width: 100px;
+  border-radius: 10px;
+  object-fit: contain;
+  /* Filter invert(1) maakt zwarte iconen wit. Verwijder dit als je logo al wit/transparant is */
+
+}
+
+    .logo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .profile-frame {
+      width: 240px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .profile-frame::after {
+      content: '';
+      position: absolute;
+      width: 100%; height: 100%;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 50%;
+      animation: spinSlow 20s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      align-items: center;
+    }
+
+    .logo-main {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .logo-bracket {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--accent-mint);
+      line-height: 1;
+      font-family: var(--font-mono);
+      letter-spacing: 0;
+      margin: 0 -0.5rem;
+      filter: drop-shadow(0 0 15px rgba(0, 229, 160, 0.4));
+    }
+
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+      overflow: visible;
+    }
+
+    .logo-big {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      font-family: var(--font-display);
+      margin: auto 0;
+    }
+
+    .logo-bottom {
+      font-family: var(--font-display);
+      font-weight: 900;
+      letter-spacing: 0rem;
+      font-size: 1.2rem;
+      color: #fff;
+      line-height: 0.1;
+      align-self: center;
+      margin-bottom: 0.15rem;
+    }
+
+    .accent { color: var(--accent-mint); }
+
+    /* --- Card Styles --- */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.2rem;
+      padding-bottom: 3.5rem; /* Ruimte voor de tagline onderaan */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      
+      /* Horizontale Layout */
+      display: flex;
+      flex-direction: row; 
+      align-items: center;
+      justify-content: flex-start;
+      
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+      position: relative; /* Belangrijk voor absolute positioning van tagline */
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      
+      height: auto;
+      min-height: 140px;
+      
+      opacity: 0;
+      animation: slideIn 0.6s ease-out forwards;
+    }
+
+    .col-left .card:nth-child(1) { animation-delay: 0.2s; }
+    .col-left .card:nth-child(2) { animation-delay: 0.3s; }
+    .col-left .card:nth-child(3) { animation-delay: 0.4s; }
+    
+    .col-right .card:nth-child(1) { animation-delay: 0.5s; }
+    .col-right .card:nth-child(2) { animation-delay: 0.6s; }
+    .col-right .card:nth-child(3) { animation-delay: 0.7s; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--card-accent, var(--accent-mint));
+      box-shadow: 0 10px 40px -10px rgba(0, 229, 160, 0.2);
+      background-color: #161920;
+    }
+
+    /* Mini Logo binnen de card */
+    .card-logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      flex-shrink: 0;
+      margin-right: 1.2rem;
+    }
+
+    .mini-logo-main {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .mini-bracket {
+      font-size: 3.5rem; 
+      font-weight: 900;
+      color: var(--card-accent, var(--accent-mint));
+      line-height: 0.8;
+      font-family: var(--font-mono);
+      margin: 0 -0.3rem;
+      filter: drop-shadow(0 0 8px rgba(0, 229, 160, 0.4));
+    }
+
+    .mini-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+    }
+
+    .mini-big {
+      font-size: 3rem; 
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      font-family: var(--font-display);
+    }
+
+    .mini-bottom {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1rem;
+      color: #fff;
+      line-height: 0.1;
+      margin-bottom: 0.1rem;
+    }
+
+    /* Tekst Wrapper */
+    .card-text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      flex-grow: 1;
+      padding-left: 1rem;
+      justify-content: center;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin: 0 0 0.25rem 0;
+      color: #fff;
+    }
+
+    .card-desc {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0 0 0.5rem 0;
+    }
+
+    /* Tagline Onderaan de Kaart - Dynamisch */
+    .card-tagline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Iets donkerder voor contrast */
+      border-top: 1px solid var(--card-accent, var(--accent-mint));
+      padding: 0.8rem 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      /* Dynamische font size: pas aan op basis van viewport breedte */
+      font-size: clamp(0.5rem, 1.5vw, 0.8rem); 
+      letter-spacing: 0.2em;
+      color: var(--card-accent, var(--accent-mint));
+      text-transform: uppercase;
+      box-sizing: border-box;
+      white-space: nowrap; /* Zorgt dat het op één regel blijft */
+      overflow: hidden;   /* Verberg als het echt niet past (zelden nodig met vw) */
+      text-overflow: ellipsis;
+    }
+
+    .btn {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: transparent;
+      border: 1px solid var(--card-accent, var(--accent-mint));
+      color: var(--card-accent, var(--accent-mint));
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      width: auto;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: var(--card-accent, var(--accent-mint));
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 229, 160, 0.4);
+    }
+
+    /* Responsive Mobiel */
+    @media (max-width: 1000px) {
+      .hub-container {
+        flex-direction: column;
+        gap: 2rem;
+        overflow-y: auto;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      body {
+        overflow: auto; /* Dit is goed, houd dit zo */
+        height: auto;   /* Dit is goed, houd dit zo */
+        min-height: 100vh;
+      }
+
+      .column {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .logo-wrapper {
+        order: -1;
+        margin-bottom: 1rem;
+      }
+
+      .profile-frame {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .logo-bracket { font-size: 3rem; margin: 0 -0.4rem; }
+      .logo-big { font-size: 2.2rem; }
+      .logo-bottom { font-size: 1rem; }
+
+      /* Op mobiel weer verticaal */
+      .card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        height: auto;
+        min-height: auto;
+        padding-bottom: 3.5rem; /* Houd ruimte voor tagline */
+      }
+
+      .card-logo-container {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .card-text-content {
+        align-items: center;
+        text-align: center;
+        padding-left: 0;
+      }
+      
+      .mini-bracket { font-size: 2.5rem; }
+      .mini-big { font-size: 2rem; }
+      
+      /* Op mobiel iets kleinere tagline font */
+      .card-tagline {
+        font-size: clamp(0.5rem, 3vw, 0.7rem);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Achtergrond Elementen -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <div class="hub-container">
+    
+    <!-- Linker Kolom -->
+    <div class="column col-left">
+      
+      <!-- Portfolio -->
+      <a href="https://kaasrijketurk.github.io/MC" target="_blank" class="card" style="--card-accent: var(--accent-mint);">
+        <div class="card-logo-container">
+          <span class="mini-logo-main">
+            <span class="mini-bracket">[</span>
+            <span class="mini-block">
+              <span class="mini-big">M</span>
+              <span class="mini-bottom">can</span>
+            </span>
+            <span class="mini-bracket">]</span>
+          </span>
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Portfolio</h3>
+          <p class="card-desc">My work &amp; projects</p>
+          <span class="btn">View Site</span>
+        </div>
+        <div class="card-tagline">ANALYSE. CREATE. PLAY.</div>
+      </a>
+
+      <!-- Sandwich -->
+      <a href="https://kaasrijketurk.github.io/Sandwich/" target="_blank" class="card" style="--card-accent: var(--accent-red);">
+        <div class="card-logo-container">
+          <span class="mini-logo-main">
+            <span class="mini-bracket">[</span>
+            <span class="mini-block">
+              <span class="mini-big">TR</span>
+              <span class="mini-bottom">WICH</span>
+            </span>
+            <span class="mini-bracket">]</span>
+          </span>
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Turkisch</h3>
+          <h3 class="card-title">Sandwich</h3>
+          <p class="card-desc">Eat authentic</p>
+          <span class="btn">Abominations</span>
+        </div>
+        <div class="card-tagline">COOK. BAKE. BREAK.</div>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://youtube.com/@dawahsimplified?si=16Z3CV35uo50XcGc" target="_blank" class="card" style="--card-accent: var(--accent-orange);">
+        <div class="card-logo-container">
+          <span class="mini-logo-main">
+            <span class="mini-bracket">[</span>
+            <span class="mini-block">
+              <span class="mini-big">DW</span>
+              <span class="mini-bottom">Simplified</span>
+            </span>
+            <span class="mini-bracket">]</span>
+          </span>
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Dawah</h3>
+           <h3 class="card-title">Simplified</h3>
+          <p class="card-desc">Islamic Knowledge</p>
+          <span class="btn">Subscribe</span>
+        </div>
+        <div class="card-tagline">SIMPLE. EASY. DAWAH.</div>
+      </a>
+
+    </div>
+
+    <!-- Midden: Logo -->
+           <a style="--card-accent: var(--accent-mint);">
+
+    <div class="logo-wrapper">
+      <div class="profile-frame">
+        <span class="nav-logo">
+          <span class="logo-main">
+            <span class="logo-bracket accent">[</span>
+            <span class="logo-block">
+              <span class="logo-big">M</span>
+              <span class="logo-bottom">HUB</span>
+            </span>
+            <span class="logo-bracket accent">]</span>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Rechter Kolom -->
+    <div class="column col-right">
+
+      <!-- Quotes -->
+       
+
+      
+      <a href="https://www.miracles-of-quran.com/" target="_blank" class="card" style="--card-accent: var(--accent-blue);">
+        <div class="card-logo-container">
+          <!-- Hier verwijzen we naar het plaatje -->
+          <img src="MQ.png" alt="Man op kameel met laptop" class="camel-img">
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Miracles of</h3>
+          <h3 class="card-title">the Quran</h3>
+          <p class="card-desc">It's trully incredible</p>
+          <span class="btn">Take a look</span>
+        </div>
+        <div class="card-tagline">LEARN. THE. TRUTH.</div>
+      </a>
+
+
+<a href="https://thaura.ai/home" class="card" style="--card-accent: var(--accent-gray);">
+        <div class="card-logo-container">
+          <!-- Hier verwijzen we naar het plaatje -->
+          <img src="camel-logo.png" alt="Man op kameel met laptop" class="camel-img">
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Thaura AI</h3>
+          <p class="card-desc">The Ethical Artificial Intelligence</p>
+          <span class="btn">Take a look</span>
+        </div>
+        <div class="card-tagline">ETHICAL. EFFICIENT. PRIVATE.</div>
+      </a>
+
+  </div>
+
+
+</body></html>
