@@ -25,25 +25,27 @@
       --font-display: 'Syne', sans-serif;
     }
 
-    body {
+        body {
       background: var(--bg-color);
       color: var(--text-main);
       font-family: var(--font-display);
       margin: 0;
       padding: 0;
-      min-height: 100vh; /* WAS: height: 100vh; */
+      min-height: 100vh; 
       width: 100vw;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow-y: auto;   /* WAARDE TOEGEVOEGD/VERANDERD: Zorgt voor verticale scroll */
-      overflow-x: hidden; /* Horizontale scroll uit */
+      justify-content: center; /* Alleen horizontaal centreren */
+      overflow-x: hidden; 
+      overflow-y: auto;   /* Zorgt voor verticale scrollbalk */
     }
 
 
+
+
     /* --- Achtergrond Effecten --- */
+        /* --- Achtergrond Effecten --- */
     .bg-grid {
-      position: absolute;
+      position: fixed; /* WAS: absolute; */
       top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -53,8 +55,9 @@
       pointer-events: none;
     }
 
-    .bg-glow {
-      position: absolute;
+
+        .bg-glow {
+      position: fixed; /* WAS: absolute; */
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 600px; height: 600px;
@@ -63,6 +66,7 @@
       animation: pulseGlow 8s infinite alternate;
       pointer-events: none;
     }
+
 
     @keyframes pulseGlow {
       0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
@@ -135,7 +139,7 @@
     .nav-logo {
       display: flex;
       flex-direction: column;
-      line-height: 1;
+      line-height: 2rem;
       align-items: center;
     }
 
@@ -161,7 +165,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      height: 4rem;
+      height: 2.3rem;
       overflow: visible;
     }
 
@@ -169,18 +173,18 @@
       font-size: 3rem;
       font-weight: 900;
       color: #fff;
-      line-height: 1;
+      line-height: 2.1rem;
       font-family: var(--font-display);
       margin: auto 0;
     }
 
     .logo-bottom {
       font-family: var(--font-display);
-      font-weight: 900;
+      font-weight: 600;
       letter-spacing: 0rem;
       font-size: 1.2rem;
-      color: #fff;
-      line-height: 0.1;
+      color: #ffffff;
+      line-height: -1rem;
       align-self: center;
       margin-bottom: 0.15rem;
     }
@@ -363,32 +367,31 @@
       box-shadow: 0 0 15px rgba(0, 229, 160, 0.4);
     }
 
-    /* Responsive Mobiel */
-    @media (max-width: 1000px) {
+   @media (max-width: 1000px) {
       .hub-container {
-        flex-direction: column;
+        flex-direction: column;       /* <--- BELANGRIJK: Zet alles onder elkaar */
         gap: 2rem;
-        overflow-y: auto;
         align-items: center;
-        justify-content: flex-start;
-        padding-top: 4rem;
+        justify-content: flex-start;  /* <--- BELANGRIJK: Begin bovenaan, niet in het midden */
+        padding-top: 4rem;            /* Ruimte bovenaan zodat niets afgesneden wordt */
         padding-bottom: 4rem;
+        width: 100%;
       }
 
       body {
-        overflow: auto; /* Dit is goed, houd dit zo */
-        height: auto;   /* Dit is goed, houd dit zo */
+        overflow-y: auto;             /* Zorgt voor scrollbalk */
+        height: auto;                 /* Laat hoogte meegroeien */
         min-height: 100vh;
       }
 
       .column {
-        width: 100%;
-        max-width: 400px;
+        width: 100%;                  /* Kolom vult breedte */
+        max-width: 450px;             /* Maar niet te breed */
       }
 
       .logo-wrapper {
-        order: -1;
-        margin-bottom: 1rem;
+        order: -1;                    /* Logo altijd bovenaan op mobiel */
+        margin-bottom: 2rem;
       }
 
       .profile-frame {
@@ -428,6 +431,41 @@
       .card-tagline {
         font-size: clamp(0.5rem, 3vw, 0.7rem);
       }
+
+      .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1rem;
+      align-items: center;
+    }
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 2.3rem;
+      overflow: visible;
+    }
+
+    .logo-big {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 2.1rem;
+      font-family: var(--font-display);
+      margin: auto 0;
+    }
+
+    .logo-bottom {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0rem;
+      font-size: 1.2rem;
+      color: #ffffff;
+      line-height: -1rem;
+      align-self: center;
+      margin-bottom: 0.15rem;
+    }
     }
   </style>
 </head>
