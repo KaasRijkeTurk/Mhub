@@ -61,7 +61,7 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(0, 229, 160, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 0, 242, 0.08) 0%, transparent 70%);
       z-index: -1;
       animation: pulseGlow 8s infinite alternate;
       pointer-events: none;
@@ -152,12 +152,12 @@
     .logo-bracket {
       font-size: 4rem;
       font-weight: 900;
-      color: var(--accent-mint);
+      color: var(--accent-purple);
       line-height: 1;
       font-family: var(--font-mono);
       letter-spacing: 0;
       margin: 0 -0.5rem;
-      filter: drop-shadow(0 0 15px rgba(0, 229, 160, 0.4));
+      filter: drop-shadow(0 0 15px rgba(255, 0, 242, 0.4));
     }
 
     .logo-block {
@@ -189,7 +189,7 @@
       margin-bottom: 0.15rem;
     }
 
-    .accent { color: var(--accent-mint); }
+    .accent { color: var(--accent-purple); }
 
     /* --- Card Styles --- */
     .card {
@@ -220,6 +220,7 @@
       animation: slideIn 0.6s ease-out forwards;
     }
 
+
     .col-left .card:nth-child(1) { animation-delay: 0.2s; }
     .col-left .card:nth-child(2) { animation-delay: 0.3s; }
     .col-left .card:nth-child(3) { animation-delay: 0.4s; }
@@ -235,8 +236,8 @@
 
     .card:hover {
       transform: translateY(-5px) scale(1.02);
-      border-color: var(--card-accent, var(--accent-mint));
-      box-shadow: 0 10px 40px -10px rgba(0, 229, 160, 0.2);
+      border-color: var(--card-accent, var(--accent-purple));
+      box-shadow: 0 10px 40px -10px rgba(255, 0, 242, 0.2);
       background-color: #161920;
     }
 
@@ -260,11 +261,11 @@
     .mini-bracket {
       font-size: 3.5rem; 
       font-weight: 900;
-      color: var(--card-accent, var(--accent-mint));
+      color: var(--card-accent, var(--accent-purple));
       line-height: 0.8;
       font-family: var(--font-mono);
       margin: 0 -0.3rem;
-      filter: drop-shadow(0 0 8px rgba(0, 229, 160, 0.4));
+      filter: drop-shadow(0 0 8px rgba(255, 0, 242, 0.4));
     }
 
     .mini-block {
@@ -366,6 +367,10 @@
       color: #000;
       box-shadow: 0 0 15px rgba(0, 229, 160, 0.4);
     }
+    .footer-link {
+      display: none;
+      }
+
 
    @media (max-width: 1000px) {
       .hub-container {
@@ -376,6 +381,16 @@
         padding-top: 4rem;            /* Ruimte bovenaan zodat niets afgesneden wordt */
         padding-bottom: 4rem;
         width: 100%;
+      }
+      .footer-link {
+        margin-top: -2rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        padding: 2rem 1rem;
+        align-self: center;
+        text-decoration: none;
+        visibility: visible; /* Verberg de footer op mobiel */
+        display: block; /* Zorg dat het zichtbaar is */
       }
 
       body {
@@ -391,7 +406,7 @@
 
       .logo-wrapper {
         order: -1;                    /* Logo altijd bovenaan op mobiel */
-        margin-bottom: 2rem;
+        margin-bottom: 0rem;
       }
 
       .profile-frame {
@@ -466,6 +481,7 @@
       align-self: center;
       margin-bottom: 0.15rem;
     }
+    
     }
   </style>
 </head>
@@ -597,7 +613,35 @@
         <div class="card-tagline">ETHICAL. EFFICIENT. PRIVATE.</div>
       </a>
 
+      <!-- Contact -->
+      <a href="mailto:tothinkornottothink@hotmail.com" class="card" style="--card-accent: var(--accent-purple);">
+        <div class="card-logo-container">
+          <span class="mini-logo-main">
+            <span class="mini-bracket">[</span>
+            <span class="mini-block">
+              <span class="mini-big">Mail</span>
+              <span class="mini-bottom">me</span>
+            </span>
+            <span class="mini-bracket">]</span>
+          </span>
+        </div>
+        <div class="card-text-content">
+          <h3 class="card-title">Contact</h3>
+          <p class="card-desc">Get in touch with me.</p>
+          <span class="btn">Send Email</span>
+        </div>
+        <div class="card-tagline">REACH. OUT. NOW.</div>
+      </a>
+
+    </div>
+      <a href="https://imgs.search.brave.com/ONrCwtGUBdepFgmIpyDxa9hOA7Z_LjqnF4F83DFMrOw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzU1L2Zl/LzA1LzU1ZmUwNTZh/NzRlOTdkYjkxZTFm/M2I1MjIzN2I2MTY2/LmpwZw" target="_blank" class="footer-link">
+    &copy; 2067 Mhub. All rights to be clicked. (click me)
+  </a>
   </div>
+
+
+
+
 
 
 </body></html>
